@@ -25,21 +25,31 @@
 </header>
    
 
-   <v-layout id="home" justify-start="true">
+<div class="darkness"></div>
+    <v-layout id="home" justify-start="true">
+
     <div id="bgex"  v-on:click='explorecolor()'>
+      
+ 
        <h2 id="exh2">Explore</h2>
-      <div style="height:80%"></div>
+      <div class ="animate-arrow"></div>
        <v-btn flat >
-         <v-icon  id="swipeup1" large  color="white">arrow_upward</v-icon>           
+         <v-icon  id="swipeup" class="animate-arrow" large  color="white">arrow_upward</v-icon>           
       </v-btn>
 
  </div>
+
+ <div class ="phrase">
+     <h1>What are you up to today?</h1>
+     </div>
+
+
  
     <div id="bgpt" v-on:click='explorecolor()'><h2 id="pth2">Party</h2>
-          <div style="height:80%"></div>
+          <div class ="animate-arrow"></div>
 
     <v-btn flat >
-         <v-icon  id="swipeup" large  color="white">arrow_upward</v-icon>           
+         <v-icon  id="swipeup" class="animate-arrow" large  color="white">arrow_upward</v-icon>           
       </v-btn>
     </div>
     
@@ -55,6 +65,8 @@
 </template>
 
 <script>
+
+      
 export default {
   data() {
     return {
@@ -75,7 +87,11 @@ export default {
       title: "Vuetify.js"
     };
   },
+  mounted:function(){
+   
+  },
   methods: {
+ 
     explorecolor: function() {
       var bgex = document.getElementById("bgex");
       var bgpt = document.getElementById("bgpt");
@@ -87,8 +103,12 @@ export default {
 
       var swipe = document.getElementById('swipeup')
 
+      var phrase = document.getElementsByClassName('phrase')
+
       var exclicked = false;
       var ptclicked = false;
+
+      phrase[0].style.opacity = '0'
 
       if (bgex.style.filter == this.color) {
         bgex.style.filter = "grayscale(1)";
@@ -102,7 +122,8 @@ export default {
         
         foot.removeAttribute('class');
         foot.setAttribute("class","footer pa-3 footer--absolute theme--dark")
-        swipe
+        
+
       } else {
         bgex.style.filter = this.color;
         bgex.style.width = "200%";
@@ -135,11 +156,64 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+.darkness{
+    position: absolute;
+  z-index: 101;
+  background-color: rgb(32, 48, 44);
+  width: 100%;
+  height: 100%;
+opacity: 0;
+  animation: dissapear 4s;
+  pointer-events: none;
+
+}
+
+.animate-arrow{
+  height: 60%;
+  animation: up 1.8s, dissapear 1.8s;
+  animation-iteration-count: infinite;
+  opacity: 1;
+
+
+}
+@keyframes up {
+  from{height: 80%;}
+  to{height: 60%;}
+}
+
+@keyframes dissapear {
+  from{opacity: 1}
+  to{opacity: 0;}
+  
+}
+.phrase{
+  position: absolute;
+color :white;
+width: 100%;
+z-index: 100;
+margin-top: 6em;
+font-family: 'Tillana', cursive;
+animation: fadein 2s;
+transition: 1s ease-in-out;
+    font-size: 0.8em;
+
+
+}
+
+@keyframes fadein {
+    from { opacity: 0; 
+    ;font-size: 0.2em}
+    to   { opacity: 1;
+    font-size: 0.8em;
+     }
+}
 
 h1,
 h2 {
   font-weight: normal;
 }
+
+
 
 .pa-3{
   opacity: 0.8;
@@ -172,13 +246,13 @@ h2{
 }
 #bgex h2 {
   opacity: 0;
-  transition: 0.5s ease-in-out;
+  transition: 1s ease-in-out;
   transition-delay: 1s;
 }
 #bgpt h2 {
   
   opacity: 0;
-  transition: 0.5s ease-in-out;
+  transition: 1.7s ease-in-out;
     transition-delay: 1s;
 
 }
