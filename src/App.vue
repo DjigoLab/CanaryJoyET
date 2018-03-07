@@ -2,28 +2,84 @@
   <v-app>
 
     <header>
-      <v-navigation-drawer
-        temporary
-        absolute
-        v-model="sideNav"
-        >
-
-       <v-list-tile-action>
-            <v-btn icon @click.stop="sideNav = !sideNav">
-              <v-icon>chevron_left</v-icon>
-            </v-btn>
-       </v-list-tile-action>
-
-        </v-navigation-drawer>
+    
 
     <v-toolbar>
 
       <v-toolbar-side-icon @click.stop="sideNav = !sideNav"></v-toolbar-side-icon>
-      <v-toolbar-title>CanaryJoy</v-toolbar-title>
+      <v-toolbar-title></v-toolbar-title>
       <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down">
+      <v-btn flat><v-icon>search</v-icon></v-btn>
+      <v-btn flat><v-icon>star</v-icon></v-btn>
+      <v-btn flat><v-icon>refresh</v-icon></v-btn>
+      </v-toolbar-items>
     </v-toolbar>
+
+    <!--   <v-navigation-drawer
+        temporary
+        absolute
+        v-model="sideNav"
+        >
+ <v-toolbar flat>
+      <v-list>
+        <v-list-tile>
+          <v-list-tile-title class="title">
+
+              <v-icon   @click.stop="sideNav = !sideNav">chevron_left</v-icon>
+            <span>Menu</span>
+          </v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+
+      
+    </v-toolbar>
+     <v-divider></v-divider>
+    <v-list dense class="pt-0">
+      <v-list-tile v-for="item in items" :key="item.title" @click="a">
+        <v-list-tile-action>
+          <v-icon>{{ item.icon }}</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+    </v-list>
+
+ 
+        </v-navigation-drawer> -->
 </header>
-   
+
+ <v-list  v-for="place in places" v-bind:key="place" id="lista" style="height:100%">
+  <v-card >  
+          <v-card-media
+          class="white--text"
+          height="100px"
+          src="https://images.unsplash.com/photo-1513517235976-e8999eb5f4cd?ixlib=rb-0.3.5&s=b75639b5f4746e68727ac01c9befb0f9&auto=format&fit=crop&w=600&q=60"
+        >
+        <v-container fluid>
+          <v-layout>
+            <v-flex xs12 align-end flexbox>
+              <span class="headline">{{ places.title }}</span>
+
+             </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-media>
+        <v-card-title>
+          <div> 
+            <span class="grey--text">{{places.description}}</span><br>
+            <span>{{places.tag1}}</span><br>
+            <span></span>
+           </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn icon flat ><v-icon>star_border</v-icon></v-btn>
+          <v-btn icon flat ><v-icon>share</v-icon></v-btn>
+        </v-card-actions>
+      </v-card>
+   </v-list>
+
 
 <div class="darkness"></div>
     <v-layout id="home" justify-start="true">
@@ -77,9 +133,51 @@ export default {
       fixed: false,
       items: [
         {
-          icon: "bubble_chart",
-          title: "Inspire"
+          icon: "star",
+          title: "Favorites"
         }
+        
+      ],
+      places:[
+        {
+          imagesrc : "",
+          title: "",
+          description : "",
+          tags:[
+            {tag1:"",
+            tag2:""}
+            ]
+        },
+         {
+          imagesrc : "",
+          title: "",
+          description : "",
+          tags:[
+            {tag1:"",
+            tag2:""}
+            ]
+        },
+         {
+          imagesrc : "",
+          title: "",
+          description : "",
+          tags:[
+            {tag1:"",
+            tag2:""}
+            ]
+        },
+         {
+          imagesrc : "",
+          title: "",
+          description : "",
+          tags:[
+            {tag1:"",
+            tag2:""}
+            ]
+        }
+        
+        
+        
       ],
       miniVariant: false,
       right: true,
@@ -156,6 +254,12 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
+
+#home{display:none;}
+header {}
+#lista{background-color: #2c3e50;}
+
+
 .darkness{
     position: absolute;
   z-index: 101;
@@ -269,7 +373,6 @@ h2{
 }
 
 
-header {
-  display: none;
-}
+
+
 </style>
