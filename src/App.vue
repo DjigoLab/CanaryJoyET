@@ -3,7 +3,57 @@
     
 <div id="bglist"></div>
 
- <v-list id="lista" >
+    <v-layout id="home" fill-height>
+
+    <div id="bgex"  v-on:click='explorecolor()'>
+      
+ 
+       <h2 id="exh2">Explore</h2>
+      <div class ="animate-arrow" ></div>
+       <v-btn  id="swipeupEX" v-on:click.native='changepage()' flat>
+         <v-icon  class="animate-arrow" large  color="white">arrow_upward</v-icon>           
+      </v-btn>
+
+ </div>
+
+ <div class ="phrase">
+     <h1>What are you up to today?</h1>
+     </div>
+
+
+ 
+    <div id="bgpt" v-on:click='explorecolor()'><h2 id="pth2">Party</h2>
+          <div class ="animate-arrow"></div>
+
+   <v-btn  id="swipeupPT" v-on:click.native='changepage()' flat>
+ 
+         <v-icon   class="animate-arrow" large  color="white">arrow_upward</v-icon>           
+      </v-btn>
+    </div>
+    
+   </v-layout>
+
+
+    <header>
+
+    <v-toolbar id="menubar">
+
+      <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="sideNav = !sideNav" ></v-toolbar-side-icon>
+      <v-toolbar-title></v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-toolbar-items class="hidden-sm-and-down" >
+      <v-btn flat ><v-icon>refresh</v-icon></v-btn>
+      <v-btn flat><v-icon>search</v-icon></v-btn>
+      <v-btn flat><v-icon>star</v-icon></v-btn>
+      </v-toolbar-items>
+      
+    </v-toolbar>
+
+
+
+
+         <div id="bglist"></div>
+
      <v-container grid-list-xl text-xs-center>
    <v-layout row wrap>
   <v-flex xs12 class="hidden-sm-and-up" v-for="places in places" v-bind:key="places"  >
@@ -14,6 +64,7 @@
           height="100px"
           src="https://images.unsplash.com/photo-1513517235976-e8999eb5f4cd?ixlib=rb-0.3.5&s=b75639b5f4746e68727ac01c9befb0f9&auto=format&fit=crop&w=600&q=60"
         >
+
         <v-container grid-list-md fluid>
           <v-layout>
             <v-flex xs12 flexbox>
@@ -83,38 +134,8 @@
   
       </v-layout>
      </v-container>
-   </v-list>
+    </header>
 
-
-<div class="darkness"></div>
-    <v-layout id="home" justify-start="true">
-
-    <div id="bgex"  v-on:click='explorecolor()'>
-      
- 
-       <h2 id="exh2">Explore</h2>
-      <div class ="animate-arrow" ></div>
-       <v-btn  v-on:drag.native='changepage()' flat>
-         <v-icon  id="swipeup" class="animate-arrow" large  color="white">arrow_upward</v-icon>           
-      </v-btn>
-
- </div>
-
- <div class ="phrase">
-     <h1>What are you up to today?</h1>
-     </div>
-
-
- 
-    <div id="bgpt" v-on:click='explorecolor()'><h2 id="pth2">Party</h2>
-          <div class ="animate-arrow"></div>
-
-    <v-btn flat >
-         <v-icon  id="swipeup" class="animate-arrow" large  color="white">arrow_upward</v-icon>           
-      </v-btn>
-    </div>
-    
-   </v-layout>
 
 
 <v-footer id ="footer" class="pa-3" absolute dark>
@@ -240,7 +261,9 @@ export default {
 
       var foot = document.getElementById("footer");
 
-      var swipe = document.getElementById("swipeup");
+      var swipeEX = document.getElementById("swipeupEX");
+      var swipePT = document.getElementById("swipeupPT");
+
 
       var phrase = document.getElementsByClassName("phrase");
 
@@ -258,6 +281,8 @@ export default {
         bgpt.style.width = "200%";
         pth2.style.opacity = "1";
         pth2.style.transitionDelay = "1s";
+        swipeEX.style.display = "none"
+        swipePT.style.display = "inline"
 
         foot.removeAttribute("class");
         foot.setAttribute("class", "footer pa-3 footer--absolute theme--dark");
@@ -270,6 +295,8 @@ export default {
         bgpt.style.width = "50%";
         pth2.style.transitionDelay = "0ms";
         pth2.style.opacity = "0";
+        swipeEX.style.display = "inline"
+        swipePT.style.display = "none"
 
         foot.removeAttribute("class");
         foot.setAttribute("class", "footer pa-3 footer--absolute theme--light");
@@ -277,8 +304,11 @@ export default {
     },
 
     changepage: function() {
-      var home = document.getElementById("home");
-      home.style.position ="absolute"
+      var home = document.getElementById("home")
+      var listpage = document.getElementsByTagName("header")
+      listpage[0].style.display = "inline"
+     
+      home.style.display = "none"
     }
   },
   name: "App"
@@ -296,23 +326,27 @@ export default {
 
 #home {
   transition: 3s ease;
+  z-index: 200;
 }
 #lista {
   height: 100%;
-  display:none
-
+  z-index: 2;
 }
-header {
 
-display: none;
-  z-index: 1;
+#swipeupPT{display: none;}
+#swipeupEX{display: none;}
+
+#menubar{z-index: 1}
+header {
+  display: none;
+  z-index: 201;
 }
 
 #bglist{
   position: absolute;
   height: 100%;
   width: 100%;
-    background-image: url("./assets/img/explore.jpg");
+  background-image: url("./assets/img/explore.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -320,17 +354,6 @@ display: none;
   z-index: 0;
 }
 
-
-.darkness {
-  position: absolute;
-  z-index: 101;
-  background-color: rgb(32, 48, 44);
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  animation: dissapear 4s;
-  pointer-events: none;
-}
 
 .animate-arrow {
   height: 60%;
