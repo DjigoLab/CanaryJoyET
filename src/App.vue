@@ -5,7 +5,7 @@
 
     <v-layout id="home" fill-height>
 
-    <div id="bgex"  v-on:click='explorecolor()'>
+    <div id="bgex"  v-on:click="explorecolor(1)">
       
  
        <h2 id="exh2">Explore</h2>
@@ -21,14 +21,22 @@
      </div>
 
 
+<!-- 
+
+  Footer no cambiar porque changepage cambia el
+  color al ahcer click en el boton (cambia 2 veces)
+-->
+
  
-    <div id="bgpt" v-on:click='explorecolor()'><h2 id="pth2">Party</h2>
+    <div id="bgpt" v-on:click="explorecolor(0)"><h2 id="pth2">Party</h2>
           <div class ="animate-arrow"></div>
 
-   <v-btn  id="swipeupPT" v-on:click.native='changepage()' flat>
+   <v-btn  id="swipeupPT" 
+   v-on:click.native='changepagePT()' flat>
  
          <v-icon   class="animate-arrow" large  color="white">arrow_upward</v-icon>           
       </v-btn>
+      
     </div>
     
    </v-layout>
@@ -46,17 +54,20 @@
       <v-btn flat><v-icon>search</v-icon></v-btn>
       <v-btn flat><v-icon>star</v-icon></v-btn>
       </v-toolbar-items>
-      
+          
     </v-toolbar>
 
 
 
 
-         <div id="bglist"></div>
 
      <v-container grid-list-xl text-xs-center>
    <v-layout row wrap>
-  <v-flex xs12 class="hidden-sm-and-up" v-for="places in places" v-bind:key="places"  >
+  
+  <div   ></div>
+
+  
+  <v-flex xs12 class="hidden-sm-and-up" v-for="data in myJson" v-bind:key="data"  >
      <v-card>  
 
           <v-card-media
@@ -68,7 +79,7 @@
         <v-container grid-list-md fluid>
           <v-layout>
             <v-flex xs12 flexbox>
-              <span class="headline">{{ places.title }}</span>
+              <span class="headline">{{ data.places.title }}</span>
 
              </v-flex>
             </v-layout>
@@ -76,9 +87,8 @@
         </v-card-media>
         <v-card-title>
           <div> 
-            <span class="grey--text">{{places.description}}</span><br>
-            <span>{{places.tag1}}</span><br>
-            <span></span>
+            <span class="grey--text">{{data.places.description}}</span><br>
+            <span v-for="tag in data.places.tags" v-bind:key="tag">{{data.places.tags}}</span>
            </div>
         </v-card-title>
         <v-card-actions>
@@ -87,11 +97,11 @@
         </v-card-actions>
       </v-card>
       </v-flex>
-    <v-flex xs6 class="hidden-xs-only" v-for="places in places" v-bind:key="places" >
+
+      
+    <v-flex xs6 class="hidden-xs-only"   v-for="data in myJson" v-bind:key="data">
 
     <v-card>  
-
-
 
           <v-card-media
           class="white--text"
@@ -101,7 +111,7 @@
         <v-container grid-list-md fluid>
           <v-layout>
             <v-flex xs12 flexbox>
-              <span class="headline">{{ places.title }}</span>
+              <span class="headline">{{ data.places.title }}</span>
 
              </v-flex>
             </v-layout>
@@ -109,9 +119,9 @@
         </v-card-media>
         <v-card-title>
           <div> 
-            <span class="grey--text">{{places.description}}</span><br>
-            <span>{{places.tag1}}</span><br>
-            <span></span>
+            <span class="grey--text">{{data.places.description}}</span><br>
+                       <span v-for="tag in data.places.tags" v-bind:key="tag">{{data.places.tags}}</span>
+
            </div>
         </v-card-title>
         <v-card-actions>
@@ -148,6 +158,8 @@
 </template>
 
 <script>
+import json from "./assets/places.json";
+
 export default {
   data() {
     return {
@@ -156,13 +168,14 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
+      data: "",
       items: [
         {
           icon: "star",
           title: "Favorites"
         }
       ],
-       dropwdown: [
+      dropwdown: [
         {
           icon: "maps",
           title: "Map"
@@ -171,88 +184,29 @@ export default {
       places: [
         {
           imagesrc: "",
-          title: "a",
-          description: "a",
-          tags: [
-            {
-              tag1: "a",
-              tag2: ""
-            }
-          ]
-        },
-        {
-          imagesrc: "",
-          title: "b",
-          description: "b",
-          tags: [
-            {
-              tag1: "b",
-              tag2: ""
-            }
-          ]
-        },
-        {
-          imagesrc: "",
-          title: "c",
-          description: "c",
-          tags: [
-            {
-              tag1: "c",
-              tag2: ""
-            }
-          ]
-        },
-        {
-          imagesrc: "d",
-          title: "d",
-          description: "d",
-          tags: [
-            {
-              tag1: "d",
-              tag2: ""
-            }
-          ]
-        },  {
-          imagesrc: "",
-          title: "e",
-          description: "e",
-          tags: [
-            {
-              tag1: "e",
-              tag2: ""
-            }
-          ]
-        },  {
-          imagesrc: "",
-          title: "f",
-          description: "f",
-          tags: [
-            {
-              tag1: "f",
-              tag2: ""
-            }
-          ]
-        },  {
-          imagesrc: "",
-          title: "g",
-          description: "g",
-          tags: [
-            {
-              tag1: "g",
-              tag2: ""
-            }
-          ]
+          title: "",
+          description: "",
+          tags: [],
+          created: function() {
+            this.getJson();
+          }
         }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js"
+      title: "Vuetify.js",
+      myJson: json
     };
   },
-  mounted: function() {},
+
+  mounted: function() {
+    $.getJSON("./assets/places.json", function(json) {
+      self.posts = data;
+    });
+  },
   methods: {
-    explorecolor: function() {
+    explorecolor: function(idbg) {
       var bgex = document.getElementById("bgex");
       var bgpt = document.getElementById("bgpt");
 
@@ -264,7 +218,6 @@ export default {
       var swipeEX = document.getElementById("swipeupEX");
       var swipePT = document.getElementById("swipeupPT");
 
-
       var phrase = document.getElementsByClassName("phrase");
 
       var exclicked = false;
@@ -272,43 +225,70 @@ export default {
 
       phrase[0].style.opacity = "0";
 
-      if (bgex.style.filter == this.color) {
-        bgex.style.filter = "grayscale(1)";
-        bgex.style.width = "50%";
-        exh2.style.transitionDelay = "0ms";
-        exh2.style.opacity = "0";
-        bgpt.style.filter = this.color;
-        bgpt.style.width = "200%";
-        pth2.style.opacity = "1";
-        pth2.style.transitionDelay = "1s";
-        swipeEX.style.display = "none"
-        swipePT.style.display = "inline"
-
-        foot.removeAttribute("class");
-        foot.setAttribute("class", "footer pa-3 footer--absolute theme--dark");
-      } else {
-        bgex.style.filter = this.color;
-        bgex.style.width = "200%";
-        exh2.style.opacity = "1";
-        exh2.style.transitionDelay = "1s";
-        bgpt.style.filter = "grayscale(1)";
-        bgpt.style.width = "50%";
-        pth2.style.transitionDelay = "0ms";
-        pth2.style.opacity = "0";
-        swipeEX.style.display = "inline"
-        swipePT.style.display = "none"
-
-        foot.removeAttribute("class");
-        foot.setAttribute("class", "footer pa-3 footer--absolute theme--light");
+      switch (idbg) {
+        case 0:
+          bgex.style.filter = "grayscale(1)";
+          bgex.style.width = "50%";
+          exh2.style.transitionDelay = "0ms";
+          pth2.style.transitionDelay = "1s";
+          exh2.style.opacity = "0";
+          bgpt.style.filter = this.color;
+          bgpt.style.width = "200%";
+          pth2.style.opacity = "1";
+          swipeEX.style.display = "none";
+          swipePT.style.display = "inline";
+          var bglist = document.getElementById("bglist");
+          bglist.style.backgroundImage = 'url(https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb)';
+          foot.removeAttribute("class");
+          foot.setAttribute(
+            "class",
+            "footer pa-3 footer--absolute theme--dark"
+          );
+          break;
+        case 1:
+          bgex.style.filter = this.color;
+          bgex.style.width = "200%";
+          exh2.style.opacity = "1";
+          exh2.style.transitionDelay = "1s";
+          pth2.style.transitionDelay = "0s";
+          bgpt.style.filter = "grayscale(1)";
+          bgpt.style.width = "50%";
+          pth2.style.opacity = "0";
+          swipeEX.style.display = "inline";
+          swipePT.style.display = "none";
+          var bglist = document.getElementById("bglist");
+          foot.removeAttribute("class");
+          foot.setAttribute(
+            "class",
+            "footer pa-3 footer--absolute theme--light"
+          );
+          break;
       }
     },
 
     changepage: function() {
-      var home = document.getElementById("home")
-      var listpage = document.getElementsByTagName("header")
-      listpage[0].style.display = "inline"
-     
-      home.style.display = "none"
+      var home = document.getElementById("home");
+      var listpage = document.getElementsByTagName("header");
+      listpage[0].style.display = "inline";
+      var foot = document.getElementById("footer");
+
+      foot.removeAttribute("class");
+      foot.setAttribute("class", "footer pa-3 footer--absolute theme--light");
+
+      home.style.display = "none";
+    },
+
+    changepagePT: function() {
+      var home = document.getElementById("home");
+      var listpage = document.getElementsByTagName("header");
+      var foot = document.getElementById("footer");
+
+      listpage[0].style.display = "inline";
+
+      foot.removeAttribute("class");
+      foot.setAttribute("class", "footer pa-3 footer--absolute theme--dark");
+
+      home.style.display = "none";
     }
   },
   name: "App"
@@ -333,27 +313,36 @@ export default {
   z-index: 2;
 }
 
-#swipeupPT{display: none;}
-#swipeupEX{display: none;}
+#footer {
+  z-index: 300;
+}
 
-#menubar{z-index: 1}
+#swipeupPT {
+  display: none;
+}
+#swipeupEX {
+  display: none;
+}
+
+#menubar {
+  z-index: 1;
+}
 header {
   display: none;
   z-index: 201;
 }
 
-#bglist{
+#bglist {
   position: absolute;
+  background-image: url("./assets/img/explore.jpg");
   height: 100%;
   width: 100%;
-  background-image: url("./assets/img/explore.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
   filter: blur(5px);
   z-index: 0;
 }
-
 
 .animate-arrow {
   height: 60%;
