@@ -64,10 +64,10 @@
      <v-container grid-list-xl text-xs-center>
    <v-layout row wrap>
   
-  <div   ></div>
 
   
-  <v-flex xs12 class="hidden-sm-and-up" v-for="data in myJson" v-bind:key="data"  >
+  <v-flex md4 class="hidden-sm-and-up" v-if="clicked === 1"  v-for=" place in myJson" v-bind:key="place" >
+    
      <v-card>  
 
           <v-card-media
@@ -79,7 +79,7 @@
         <v-container grid-list-md fluid>
           <v-layout>
             <v-flex xs12 flexbox>
-              <span class="headline">{{ data.places.title }}</span>
+              <span class="headline">{{ place.title }}</span>
 
              </v-flex>
             </v-layout>
@@ -87,8 +87,10 @@
         </v-card-media>
         <v-card-title>
           <div> 
-            <span class="grey--text">{{data.places.description}}</span><br>
-            <span v-for="tag in data.places.tags" v-bind:key="tag">{{data.places.tags}}</span>
+            <span class="grey--text">{{place.description}}</span><br>
+            <v-flex>
+                       <v-btn   class="tagxs" v-for="tag in place.tags" v-bind:key="tag"> {{tag}}</v-btn>
+                       </v-flex>
            </div>
         </v-card-title>
         <v-card-actions>
@@ -98,8 +100,8 @@
       </v-card>
       </v-flex>
 
-      
-    <v-flex xs6 class="hidden-xs-only"   v-for="data in myJson" v-bind:key="data">
+    
+    <v-flex xs6 class="hidden-xs-only" v-if="clicked === 1" v-for="place in myJson" v-bind:key="place">
 
     <v-card>  
 
@@ -111,7 +113,7 @@
         <v-container grid-list-md fluid>
           <v-layout>
             <v-flex xs12 flexbox>
-              <span class="headline">{{ data.places.title }}</span>
+              <span class="headline">{{ place.title }}</span>
 
              </v-flex>
             </v-layout>
@@ -119,9 +121,11 @@
         </v-card-media>
         <v-card-title>
           <div> 
-            <span class="grey--text">{{data.places.description}}</span><br>
-                       <span v-for="tag in data.places.tags" v-bind:key="tag">{{data.places.tags}}</span>
+            <span class="grey--text">{{place.description}}</span><br>
+            <v-flex >
 
+                       <v-btn  class="tag" small v-for="tag in place.tags" v-bind:key="tag">  {{tag}}</v-btn>
+            </v-flex>
            </div>
         </v-card-title>
         <v-card-actions>
@@ -142,6 +146,86 @@
       </v-card>
       </v-flex>
   
+
+  <v-flex xs12 class="hidden-sm-and-up" v-if="clicked === 0"  v-for=" place in myPTJson" v-bind:key="place" >
+    
+     <v-card>  
+
+          <v-card-media
+          class="white--text"
+          height="100px"
+          src="https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb"
+        >
+
+        <v-container grid-list-md fluid>
+          <v-layout>
+            <v-flex xs12 flexbox>
+              <span class="headline">{{ place.title }}</span>
+
+             </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-media>
+        <v-card-title>
+          <div> 
+            <span class="grey--text">{{place.description}}</span><br>
+                        <v-flex md4>
+
+                       <v-btn  class="tagxs"  v-for="tag in place.tags" v-bind:key="tag">  {{tag}}</v-btn>
+                        </v-flex>
+           </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn icon flat ><v-icon>star_border</v-icon></v-btn>
+          <v-btn icon flat ><v-icon>share</v-icon></v-btn>
+        </v-card-actions>
+      </v-card>
+      </v-flex>
+
+  <v-flex md4 class="hidden-xs-only" v-if="clicked === 0" v-for="place in myPTJson" v-bind:key="place">
+
+    <v-card>  
+
+          <v-card-media
+          class="white--text"
+          height="100px"
+          src="https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb"
+        >
+        <v-container grid-list-md fluid>
+          <v-layout>
+            <v-flex xs12 flexbox>
+              <span class="headline">{{ place.title }}</span>
+
+             </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-media>
+        <v-card-title>
+          <div> 
+            <span class="grey--text">{{place.description}}</span><br>
+                        <v-flex >
+
+                       <v-btn   class="tag"  v-for="tag in place.tags" v-bind:key="tag"> {{tag}}</v-btn>
+                        </v-flex>
+           </div>
+        </v-card-title>
+        <v-card-actions>
+          <v-btn icon flat ><v-icon>star_border</v-icon></v-btn>
+          <v-btn icon flat ><v-icon>share</v-icon></v-btn>
+        <v-spacer></v-spacer>
+          <v-menu offset-y >
+      <v-btn flat icon color="primary" dark slot="activator">
+        <v-icon>more_horiz</v-icon>
+        </v-btn>
+      <v-list>
+        <v-list-tile v-for="dropwdown in dropwdown" :key="dropwdown.title" >
+          <v-list-tile-title>{{ dropwdown.title }}</v-list-tile-title>
+        </v-list-tile>
+      </v-list>
+    </v-menu>
+        </v-card-actions>
+      </v-card>
+      </v-flex>
       </v-layout>
      </v-container>
     </header>
@@ -159,11 +243,13 @@
 
 <script>
 import json from "./assets/places.json";
+import ptjson from "./assets/party.json";
 
 export default {
   data() {
     return {
       color: "grayscale(0%)",
+      clicked: 0,
       sideNav: false,
       clipped: false,
       drawer: true,
@@ -196,15 +282,14 @@ export default {
       right: true,
       rightDrawer: false,
       title: "Vuetify.js",
-      myJson: json
+      myJson: json,
+      myPTJson: ptjson,
+      
+      
     };
   },
 
-  mounted: function() {
-    $.getJSON("./assets/places.json", function(json) {
-      self.posts = data;
-    });
-  },
+  
   methods: {
     explorecolor: function(idbg) {
       var bgex = document.getElementById("bgex");
@@ -220,8 +305,7 @@ export default {
 
       var phrase = document.getElementsByClassName("phrase");
 
-      var exclicked = false;
-      var ptclicked = false;
+       
 
       phrase[0].style.opacity = "0";
 
@@ -244,6 +328,8 @@ export default {
             "class",
             "footer pa-3 footer--absolute theme--dark"
           );
+
+      
           break;
         case 1:
           bgex.style.filter = this.color;
@@ -274,8 +360,14 @@ export default {
 
       foot.removeAttribute("class");
       foot.setAttribute("class", "footer pa-3 footer--absolute theme--light");
-
+      
       home.style.display = "none";
+      return this.clicked = 1
+
+    $.getJSON("./assets/places.json", function(json) {
+      self.post = data;
+    });
+   
     },
 
     changepagePT: function() {
@@ -289,6 +381,12 @@ export default {
       foot.setAttribute("class", "footer pa-3 footer--absolute theme--dark");
 
       home.style.display = "none";
+            return this.clicked = 0
+
+     $.getJSON("./assets/party.json", function(json) {
+      self.post = data;
+    });
+
     }
   },
   name: "App"
@@ -443,4 +541,13 @@ h2 {
 
   filter: grayscale(1);
 }
+
+.tag{
+  height: 18px;
+  font-size: 9px; 
+}
+
+.tagxs{ 
+height: 14px;
+  font-size: 8px; }
 </style>

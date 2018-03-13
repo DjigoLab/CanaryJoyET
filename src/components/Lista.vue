@@ -24,7 +24,7 @@
  <v-list id="lista" >
      <v-container grid-list-xl text-xs-center>
    <v-layout row wrap>
-  <v-flex xs12 class="hidden-sm-and-up" v-for="places in places" v-bind:key="places"  >
+  <v-flex xs12 class="hidden-sm-and-up" v-for="data in myJson" v-bind:key="data"  >
      <v-card>  
 
           <v-card-media
@@ -54,7 +54,9 @@
         </v-card-actions>
       </v-card>
       </v-flex>
-    <v-flex xs6 class="hidden-xs-only" v-for="places in places" v-bind:key="places" >
+    
+    
+    <v-flex xs6 class="hidden-xs-only" v-for="data in myJson" v-bind:key="data" >
 
     <v-card>  
 
