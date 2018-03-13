@@ -20,13 +20,6 @@
      <h1>What are you up to today?</h1>
      </div>
 
-
-<!-- 
-
-  Footer no cambiar porque changepage cambia el
-  color al ahcer click en el boton (cambia 2 veces)
--->
-
  
     <div id="bgpt" v-on:click="explorecolor(0)"><h2 id="pth2">Party</h2>
           <div class ="animate-arrow"></div>
@@ -45,11 +38,8 @@
     <header>
 
     <v-toolbar id="menubar">
-
-      <v-toolbar-side-icon class="hidden-md-and-up" @click.stop="sideNav = !sideNav" ></v-toolbar-side-icon>
-      <v-toolbar-title></v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-toolbar-items class="hidden-sm-and-down" >
+<v-spacer></v-spacer>
+      <v-toolbar-items>
       <v-btn flat ><v-icon>refresh</v-icon></v-btn>
       <v-btn flat><v-icon>search</v-icon></v-btn>
       <v-btn flat><v-icon>star</v-icon></v-btn>
@@ -68,13 +58,19 @@
   
   <v-flex md4 class="hidden-sm-and-up" v-if="clicked === 1"  v-for=" place in myJson" v-bind:key="place" >
     
-     <v-card>  
+<!-- Fix THISSSSSSSS
 
+Cargar la src DESDE JSON-->   
+
+  <v-card>  
+        <div class="bgmediainvi">{{place.imagesrc}}</div>
           <v-card-media
           class="white--text"
           height="100px"
-          src="https://images.unsplash.com/photo-1513517235976-e8999eb5f4cd?ixlib=rb-0.3.5&s=b75639b5f4746e68727ac01c9befb0f9&auto=format&fit=crop&w=600&q=60"
+          src="a"
+          onload="setCardBG()"
         >
+
 
         <v-container grid-list-md fluid>
           <v-layout>
@@ -89,7 +85,7 @@
           <div> 
             <span class="grey--text">{{place.description}}</span><br>
             <v-flex>
-                       <v-btn   class="tagxs" v-for="tag in place.tags" v-bind:key="tag"> {{tag}}</v-btn>
+                       <v-btn   class="tagxs" v-for="tag in place.tags" v-bind:key="tag"> {{tag}} </v-btn>
                        </v-flex>
            </div>
         </v-card-title>
@@ -101,7 +97,7 @@
       </v-flex>
 
     
-    <v-flex xs6 class="hidden-xs-only" v-if="clicked === 1" v-for="place in myJson" v-bind:key="place">
+    <v-flex md4 class="hidden-xs-only" v-if="clicked === 1" v-for="place in myJson" v-bind:key="place">
 
     <v-card>  
 
@@ -121,7 +117,7 @@
         </v-card-media>
         <v-card-title>
           <div> 
-            <span class="grey--text">{{place.description}}</span><br>
+            <span class="grey--text desc">{{place.description}}</span><br>
             <v-flex >
 
                        <v-btn  class="tag" small v-for="tag in place.tags" v-bind:key="tag">  {{tag}}</v-btn>
@@ -283,13 +279,10 @@ export default {
       rightDrawer: false,
       title: "Vuetify.js",
       myJson: json,
-      myPTJson: ptjson,
-      
-      
+      myPTJson: ptjson
     };
   },
 
-  
   methods: {
     explorecolor: function(idbg) {
       var bgex = document.getElementById("bgex");
@@ -304,8 +297,6 @@ export default {
       var swipePT = document.getElementById("swipeupPT");
 
       var phrase = document.getElementsByClassName("phrase");
-
-       
 
       phrase[0].style.opacity = "0";
 
@@ -322,14 +313,14 @@ export default {
           swipeEX.style.display = "none";
           swipePT.style.display = "inline";
           var bglist = document.getElementById("bglist");
-          bglist.style.backgroundImage = 'url(https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb)';
+          bglist.style.backgroundImage =
+            "url(https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb)";
           foot.removeAttribute("class");
           foot.setAttribute(
             "class",
             "footer pa-3 footer--absolute theme--dark"
           );
 
-      
           break;
         case 1:
           bgex.style.filter = this.color;
@@ -360,14 +351,13 @@ export default {
 
       foot.removeAttribute("class");
       foot.setAttribute("class", "footer pa-3 footer--absolute theme--light");
-      
-      home.style.display = "none";
-      return this.clicked = 1
 
-    $.getJSON("./assets/places.json", function(json) {
-      self.post = data;
-    });
-   
+      home.style.display = "none";
+      return (this.clicked = 1);
+
+      $.getJSON("./assets/places.json", function(json) {
+        self.post = data;
+      });
     },
 
     changepagePT: function() {
@@ -381,12 +371,11 @@ export default {
       foot.setAttribute("class", "footer pa-3 footer--absolute theme--dark");
 
       home.style.display = "none";
-            return this.clicked = 0
+      return (this.clicked = 0);
 
-     $.getJSON("./assets/party.json", function(json) {
-      self.post = data;
-    });
-
+      $.getJSON("./assets/party.json", function(json) {
+        self.post = data;
+      });
     }
   },
   name: "App"
@@ -400,6 +389,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  text-overflow: ellipsis;
 }
 
 #home {
@@ -542,12 +532,17 @@ h2 {
   filter: grayscale(1);
 }
 
-.tag{
+.tag {
   height: 18px;
-  font-size: 9px; 
+  font-size: 9px;
 }
 
-.tagxs{ 
-height: 14px;
-  font-size: 8px; }
+.tagxs {
+  height: 14px;
+  font-size: 8px;
+}
+
+.desc{
+    
+}
 </style>
