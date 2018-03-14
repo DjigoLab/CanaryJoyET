@@ -1,6 +1,9 @@
 
 </<template>
 
+
+
+
      <v-container grid-list-xl text-xs-center>
    <v-layout row wrap>
   
@@ -8,13 +11,17 @@
   
   <v-flex md4 class="hidden-sm-and-up" v-if="clicked === 1"  v-for=" place in myJson" v-bind:key="place" >
     
-     <v-card>  
+ 
 
+  <v-card>  
+        <div class="bgmediainvi">{{place.imagesrc}}</div>
           <v-card-media
           class="white--text"
           height="100px"
-          src="https://images.unsplash.com/photo-1513517235976-e8999eb5f4cd?ixlib=rb-0.3.5&s=b75639b5f4746e68727ac01c9befb0f9&auto=format&fit=crop&w=600&q=60"
+          src="a"
+          onload="setCardBG()"
         >
+
 
         <v-container grid-list-md fluid>
           <v-layout>
@@ -29,7 +36,7 @@
           <div> 
             <span class="grey--text">{{place.description}}</span><br>
             <v-flex>
-                       <v-btn   class="tagxs" v-for="tag in place.tags" v-bind:key="tag"> {{tag}}</v-btn>
+                       <v-btn   class="tagxs" v-for="tag in place.tags" v-bind:key="tag"> {{tag}} </v-btn>
                        </v-flex>
            </div>
         </v-card-title>
@@ -41,7 +48,7 @@
       </v-flex>
 
     
-    <v-flex xs6 class="hidden-xs-only" v-if="clicked === 1" v-for="place in myJson" v-bind:key="place">
+    <v-flex md4 class="hidden-xs-only" v-if="clicked === 1" v-for="place in myJson" v-bind:key="place">
 
     <v-card>  
 
@@ -61,7 +68,7 @@
         </v-card-media>
         <v-card-title>
           <div> 
-            <span class="grey--text">{{place.description}}</span><br>
+            <span class="grey--text desc">{{place.description}}</span><br>
             <v-flex >
 
                        <v-btn  class="tag" small v-for="tag in place.tags" v-bind:key="tag">  {{tag}}</v-btn>
@@ -167,7 +174,8 @@
       </v-card>
       </v-flex>
       </v-layout>
-     </v-container></template>
+     </v-container>
+</template>
 
 <style>
 

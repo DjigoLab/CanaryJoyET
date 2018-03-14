@@ -36,18 +36,39 @@
 
 
     <header>
+    <v-toolbar v-if="clicked === 1" id="menubar">
+      
+      <v-btn  flat v-on:click="changepagePT"><v-icon>swap_horiz</v-icon></v-btn>
+<v-spacer></v-spacer>
+      <v-toolbar-items>
+      <v-btn flat ><v-icon>refresh</v-icon></v-btn>
+      <v-btn v-on:click="search()" flat><v-icon>search</v-icon></v-btn>
+ <v-text-field  id="searchinput"
+          name="input-1-3"
+          label="Search"
+          single-line
+        ></v-text-field>   
+         <v-btn flat><v-icon>star</v-icon></v-btn>
+        </v-toolbar-items>
+          
+    </v-toolbar>
 
-    <v-toolbar id="menubar">
+    
+    <v-toolbar dark v-if="clicked === 0" id="menubar">
+      <v-btn flat v-on:click="changepage"><v-icon>swap_horiz</v-icon></v-btn>
 <v-spacer></v-spacer>
       <v-toolbar-items>
       <v-btn flat ><v-icon>refresh</v-icon></v-btn>
       <v-btn flat><v-icon>search</v-icon></v-btn>
+      <v-text-field
+          name="input-1-3"
+          label="Search"
+          single-line
+        ></v-text-field>   
       <v-btn flat><v-icon>star</v-icon></v-btn>
       </v-toolbar-items>
           
     </v-toolbar>
-
-
 
 
 
@@ -58,9 +79,7 @@
   
   <v-flex md4 class="hidden-sm-and-up" v-if="clicked === 1"  v-for=" place in myJson" v-bind:key="place" >
     
-<!-- Fix THISSSSSSSS
-
-Cargar la src DESDE JSON-->   
+ 
 
   <v-card>  
         <div class="bgmediainvi">{{place.imagesrc}}</div>
@@ -129,7 +148,7 @@ Cargar la src DESDE JSON-->
           <v-btn icon flat ><v-icon>share</v-icon></v-btn>
         <v-spacer></v-spacer>
           <v-menu offset-y >
-      <v-btn flat icon color="primary" dark slot="activator">
+      <v-btn flat icon color="green" dark slot="activator">
         <v-icon>more_horiz</v-icon>
         </v-btn>
       <v-list>
@@ -145,7 +164,7 @@ Cargar la src DESDE JSON-->
 
   <v-flex xs12 class="hidden-sm-and-up" v-if="clicked === 0"  v-for=" place in myPTJson" v-bind:key="place" >
     
-     <v-card>  
+     <v-card dark="">  
 
           <v-card-media
           class="white--text"
@@ -180,7 +199,7 @@ Cargar la src DESDE JSON-->
 
   <v-flex md4 class="hidden-xs-only" v-if="clicked === 0" v-for="place in myPTJson" v-bind:key="place">
 
-    <v-card>  
+    <v-card dark="">  
 
           <v-card-media
           class="white--text"
@@ -210,7 +229,7 @@ Cargar la src DESDE JSON-->
           <v-btn icon flat ><v-icon>share</v-icon></v-btn>
         <v-spacer></v-spacer>
           <v-menu offset-y >
-      <v-btn flat icon color="primary" dark slot="activator">
+      <v-btn flat icon color="grey" slot="activator">
         <v-icon>more_horiz</v-icon>
         </v-btn>
       <v-list>
@@ -228,7 +247,7 @@ Cargar la src DESDE JSON-->
 
 
 
-<v-footer id ="footer" class="pa-3" absolute dark>
+<v-footer id ="footer" class="pa-3"  dark>
   <div>Antonio Djigo - 2º DAM</div>
     <v-spacer></v-spacer>
     <div>&copy; {{ new Date().getFullYear() }}</div>
@@ -312,13 +331,11 @@ export default {
           pth2.style.opacity = "1";
           swipeEX.style.display = "none";
           swipePT.style.display = "inline";
-          var bglist = document.getElementById("bglist");
-          bglist.style.backgroundImage =
-            "url(https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb)";
+        
           foot.removeAttribute("class");
           foot.setAttribute(
             "class",
-            "footer pa-3 footer--absolute theme--dark"
+            "footer pa-3 theme--dark"
           );
 
           break;
@@ -333,11 +350,10 @@ export default {
           pth2.style.opacity = "0";
           swipeEX.style.display = "inline";
           swipePT.style.display = "none";
-          var bglist = document.getElementById("bglist");
           foot.removeAttribute("class");
           foot.setAttribute(
             "class",
-            "footer pa-3 footer--absolute theme--light"
+            "footer pa-3 theme--light"
           );
           break;
       }
@@ -350,7 +366,11 @@ export default {
       var foot = document.getElementById("footer");
 
       foot.removeAttribute("class");
-      foot.setAttribute("class", "footer pa-3 footer--absolute theme--light");
+      foot.setAttribute("class", "footer pa-3 theme--light");
+      
+        var bglist = document.getElementById("bglist");
+          bglist.style.backgroundImage =
+            "url(https://images.unsplash.com/photo-1513517235976-e8999eb5f4cd?ixlib=rb-0.3.5&s=b75639b5f4746e68727ac01c9befb0f9&auto=format&fit=crop&w=600&q=60)";
 
       home.style.display = "none";
       return (this.clicked = 1);
@@ -368,14 +388,22 @@ export default {
       listpage[0].style.display = "inline";
 
       foot.removeAttribute("class");
-      foot.setAttribute("class", "footer pa-3 footer--absolute theme--dark");
+      foot.setAttribute("class", "footer pa-3  theme--dark");
 
+  var bglist = document.getElementById("bglist");
+          bglist.style.backgroundImage =
+            "url(https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb)";
       home.style.display = "none";
       return (this.clicked = 0);
 
       $.getJSON("./assets/party.json", function(json) {
         self.post = data;
       });
+    },
+
+    search: function(){
+      var input = document.getElementById("searchinput")
+
     }
   },
   name: "App"
@@ -391,6 +419,8 @@ export default {
   color: #2c3e50;
   text-overflow: ellipsis;
 }
+
+
 
 #home {
   transition: 3s ease;
@@ -544,5 +574,9 @@ h2 {
 
 .desc{
     
+}
+
+#searchinput{
+  transition: 1s ease-in-out;
 }
 </style>
