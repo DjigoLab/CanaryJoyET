@@ -1,7 +1,8 @@
 <template>
-  <v-app>
-    
+  <v-app>   
+
 <div id="bglist"></div>
+ <div id="shade"></div>
 
     <v-layout id="home" fill-height>
 
@@ -466,7 +467,6 @@ header {
   height: 60%;
   animation: up 1.8s, dissapear 1.8s;
   animation-iteration-count: infinite;
-  opacity: 1;
 }
 @keyframes up {
   from {
@@ -572,7 +572,12 @@ h2 {
   font-size: 8px;
 }
 
-.desc{
+#shade{
+  position: absolute;
+  width: 100%;
+  heigth: 100%;
+  z-index: 1000;
+  background-color: #2c3e50;
     
 }
 

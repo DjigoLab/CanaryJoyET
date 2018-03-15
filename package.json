@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "vue": "^2.5.11",
+    "vue-cordova": "^0.1.2",
     "vue-touch": "^2.0.0-beta.4",
     "vuetify": "^1.0.4"
   },

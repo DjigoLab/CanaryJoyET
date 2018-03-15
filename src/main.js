@@ -6,6 +6,10 @@ import Lista from './components/Lista.vue'
 import Vuetify from 'vuetify'
 import 'vuetify/dist/vuetify.min.css'
 
+import VueCordova from 'vue-cordova'
+Vue.use(VueCordova)
+
+
 Vue.use(Vuetify)
 
 
