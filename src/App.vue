@@ -44,33 +44,45 @@
       <v-toolbar-items>
       <v-btn flat ><v-icon>refresh</v-icon></v-btn>
       <v-btn v-on:click="search()" flat><v-icon>search</v-icon></v-btn>
- <v-text-field  id="searchinput"
-          name="input-1-3"
-          label="Search"
-          single-line
-        ></v-text-field>   
+      <v-btn flat  v-on:click="showTags()" ><v-icon id="tagshow">keyboard_arrow_down</v-icon></v-btn>
+
          <v-btn flat><v-icon>star</v-icon></v-btn>
         </v-toolbar-items>
           
     </v-toolbar>
+    
 
     
     <v-toolbar dark v-if="clicked === 0" id="menubar">
       <v-btn flat v-on:click="changepage"><v-icon>swap_horiz</v-icon></v-btn>
 <v-spacer></v-spacer>
       <v-toolbar-items>
+      <v-btn flat  v-on:click="showTags()" ><v-icon id="tagshow">keyboard_arrow_down</v-icon></v-btn>
       <v-btn flat ><v-icon>refresh</v-icon></v-btn>
       <v-btn flat><v-icon>search</v-icon></v-btn>
-      <v-text-field
-          name="input-1-3"
-          label="Search"
-          single-line
-        ></v-text-field>   
+   
       <v-btn flat><v-icon>star</v-icon></v-btn>
       </v-toolbar-items>
           
     </v-toolbar>
+ <v-subheader light="" id="tagselect">
+    <v-flex>
+        <v-btn   class="tagxs" > tag </v-btn>         <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
+        <v-btn   class="tagxs" > tag </v-btn>
 
+                       </v-flex></v-subheader>
 
 
      <v-container grid-list-xl text-xs-center>
@@ -110,7 +122,7 @@
            </div>
         </v-card-title>
         <v-card-actions>
-          <v-btn icon flat ><v-icon>star_border</v-icon></v-btn>
+          <v-btn  v-on:click="favbutton()" icon flat ><v-icon id="fav">star_border</v-icon></v-btn>
           <v-btn icon flat ><v-icon>share</v-icon></v-btn>
         </v-card-actions>
       </v-card>
@@ -137,7 +149,7 @@
         </v-card-media>
         <v-card-title>
           <div> 
-            <span class="grey--text desc">{{place.description}}</span><br>
+            <span class="grey--text">{{place.description}}</span><br>
             <v-flex >
 
                        <v-btn  class="tag" small v-for="tag in place.tags" v-bind:key="tag">  {{tag}}</v-btn>
@@ -145,7 +157,7 @@
            </div>
         </v-card-title>
         <v-card-actions>
-          <v-btn icon flat ><v-icon>star_border</v-icon></v-btn>
+          <v-btn  v-on:click="favbutton()" icon flat ><v-icon id="fav">star_border</v-icon></v-btn>
           <v-btn icon flat ><v-icon>share</v-icon></v-btn>
         <v-spacer></v-spacer>
           <v-menu offset-y >
@@ -192,7 +204,7 @@
            </div>
         </v-card-title>
         <v-card-actions>
-          <v-btn icon flat ><v-icon>star_border</v-icon></v-btn>
+          <v-btn  v-on:click="favbutton()" icon flat ><v-icon id="fav">star_border</v-icon></v-btn>
           <v-btn icon flat ><v-icon>share</v-icon></v-btn>
         </v-card-actions>
       </v-card>
@@ -226,7 +238,7 @@
            </div>
         </v-card-title>
         <v-card-actions>
-          <v-btn icon flat ><v-icon>star_border</v-icon></v-btn>
+          <v-btn v-on:click="favbutton()" icon flat ><v-icon id="fav">star_border</v-icon></v-btn>
           <v-btn icon flat ><v-icon>share</v-icon></v-btn>
         <v-spacer></v-spacer>
           <v-menu offset-y >
@@ -270,6 +282,7 @@ export default {
       clipped: false,
       drawer: true,
       fixed: false,
+      clickado: false,
       data: "",
       items: [
         {
@@ -332,12 +345,9 @@ export default {
           pth2.style.opacity = "1";
           swipeEX.style.display = "none";
           swipePT.style.display = "inline";
-        
+
           foot.removeAttribute("class");
-          foot.setAttribute(
-            "class",
-            "footer pa-3 theme--dark"
-          );
+          foot.setAttribute("class", "footer pa-3 theme--dark");
 
           break;
         case 1:
@@ -352,10 +362,7 @@ export default {
           swipeEX.style.display = "inline";
           swipePT.style.display = "none";
           foot.removeAttribute("class");
-          foot.setAttribute(
-            "class",
-            "footer pa-3 theme--light"
-          );
+          foot.setAttribute("class", "footer pa-3 theme--light");
           break;
       }
     },
@@ -368,10 +375,10 @@ export default {
 
       foot.removeAttribute("class");
       foot.setAttribute("class", "footer pa-3 theme--light");
-      
-        var bglist = document.getElementById("bglist");
-          bglist.style.backgroundImage =
-            "url(https://images.unsplash.com/photo-1513517235976-e8999eb5f4cd?ixlib=rb-0.3.5&s=b75639b5f4746e68727ac01c9befb0f9&auto=format&fit=crop&w=600&q=60)";
+
+      var bglist = document.getElementById("bglist");
+      bglist.style.backgroundImage =
+        "url(https://images.unsplash.com/photo-1513517235976-e8999eb5f4cd?ixlib=rb-0.3.5&s=b75639b5f4746e68727ac01c9befb0f9&auto=format&fit=crop&w=600&q=60)";
 
       home.style.display = "none";
       return (this.clicked = 1);
@@ -391,9 +398,9 @@ export default {
       foot.removeAttribute("class");
       foot.setAttribute("class", "footer pa-3  theme--dark");
 
-  var bglist = document.getElementById("bglist");
-          bglist.style.backgroundImage =
-            "url(https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb)";
+      var bglist = document.getElementById("bglist");
+      bglist.style.backgroundImage =
+        "url(https://images.unsplash.com/photo-1514207147125-8e6c07bbe5ad?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=bbdce3ba9f72095ab0bae8e386bead9e&dpr=1&auto=format&fit=crop&w=1000&q=80&cs=tinysrgb)";
       home.style.display = "none";
       return (this.clicked = 0);
 
@@ -402,9 +409,38 @@ export default {
       });
     },
 
-    search: function(){
-      var input = document.getElementById("searchinput")
+    search: function() {
+      var input = document.getElementById("searchinput");
+    },
 
+    favbutton: function() {
+      var fav = document.getElementById("fav");
+
+      switch (this.clickado) {
+        case true:
+          fav.innerText = "star_border";
+          this.clickado = false
+          break;
+        case false:
+          fav.innerText = "star";
+          this.clickado = true;
+          break;
+      }
+    },
+    showTags: function(){
+
+      var tagbar = document.getElementById("tagselect")
+      var button = document.getElementById("tagshow")
+
+      var compare = button.innerHTML
+
+      if(compare == "keyboard_arrow_down"){
+      tagbar.style.opacity = "0.7"
+      button.innerText = "keyboard_arrow_up"}
+      else{
+      tagbar.style.opacity = "0"
+      button.innerText = "keyboard_arrow_down"
+      }
     }
   },
   name: "App"
@@ -420,8 +456,6 @@ export default {
   color: #2c3e50;
   text-overflow: ellipsis;
 }
-
-
 
 #home {
   transition: 3s ease;
@@ -572,16 +606,27 @@ h2 {
   font-size: 8px;
 }
 
-#shade{
+#shade {
   position: absolute;
   width: 100%;
   heigth: 100%;
   z-index: 1000;
   background-color: #2c3e50;
-    
 }
 
-#searchinput{
+#searchinput {
   transition: 1s ease-in-out;
 }
+
+#fav {
+}
+
+#tagselect{
+  background-color: rgb(219, 219, 219);
+  opacity: 0;
+  border-radius: 0px 0px 30px 30px;
+  padding: 2em;
+  z-index: 200;
+  transition: 0.5s ease-in-out;
+   }
 </style>
