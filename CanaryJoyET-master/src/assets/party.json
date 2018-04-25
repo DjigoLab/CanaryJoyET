@@ -1,0 +1,55 @@
+{
+  "place1": {
+    "imagesrc": "https://images.pexels.com/photos/196652/pexels-photo-196652.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 1 Fiesta",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place2": {
+    "imagesrc": "https://images.pexels.com/photos/787961/pexels-photo-787961.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 2",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta",
+      "tag3": "etiqueta",
+      "tag4": "etiqueta"
+    }
+  },
+  "place3": {
+    "imagesrc": "https://images.pexels.com/photos/248427/pexels-photo-248427.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 3",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place4": {
+    "imagesrc": "https://images.pexels.com/photos/225228/pexels-photo-225228.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 4",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place5": {
+    "imagesrc": "https://images.pexels.com/photos/37862/musician-rockstar-band-music-37862.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 5",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  }
+}

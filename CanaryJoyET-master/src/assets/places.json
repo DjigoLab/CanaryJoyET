@@ -1,0 +1,75 @@
+{
+  "place1": {
+    "imagesrc": "https://images.pexels.com/photos/860562/pexels-photo-860562.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 1",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place2": {
+    "imagesrc": "https://images.pexels.com/photos/297755/pexels-photo-297755.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 2",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta",
+      "tag3": "etiqueta",
+      "tag4": "etiqueta"
+    }
+  },
+  "place3": {
+    "imagesrc": "https://images.pexels.com/photos/533658/pexels-photo-533658.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 3",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place4": {
+    "imagesrc": "https://images.pexels.com/photos/630833/pexels-photo-630833.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 4",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place5": {
+    "imagesrc": "https://images.pexels.com/photos/753325/pexels-photo-753325.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 5",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place6": {
+    "imagesrc": "https://images.pexels.com/photos/753325/pexels-photo-753325.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 5",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  },
+  "place7": {
+    "imagesrc": "https://images.pexels.com/photos/753325/pexels-photo-753325.jpeg?w=1260&h=750&dpr=2&auto=compress&cs=tinysrgb",
+    "title": "Sitio 5",
+    "description":
+      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna",
+    "tags": {
+      "tag1": "etiqueta",
+      "tag2": "etiqueta"
+    }
+  }
+}
